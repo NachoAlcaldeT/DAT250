@@ -21,7 +21,3 @@ The task has been successfully completed. All identified issues have been resolv
 
 There are no pending issues with this task. All requirements have been met, and the application has been verified to function correctly.
 
----
-
-**Notes:** Make sure to add the link to your code repository in the indicated place and verify that everything works correctly before final submission.
-
