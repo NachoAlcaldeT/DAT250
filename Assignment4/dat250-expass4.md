@@ -37,8 +37,6 @@ During the installation and use of Java Persistence Architecture (JPA), I encoun
 
 The code for the experiment can be found at the following link: [Experiment 2 Code](https://github.com/NachoAlcaldeT/DAT250/tree/main/Assignment4/dat250-jpa-tutorial-master).
 
-Make sure that the included test case passes successfully.
-
 ## Pending Issues
 
 1. **Handling Complex Relationships**: Although most relationships have been implemented correctly, there are still some minor issues with synchronizing collections between entities.
