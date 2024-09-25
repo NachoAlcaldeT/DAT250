@@ -92,38 +92,13 @@ Reference link: [Bulk Write Operations](https://docs.mongodb.com/manual/core/bul
 ### Example of Experiment 2 Running (Map-Reduce)
 
 #### **Map-Reduce Operation**
-For the Map-Reduce experiment, I created a collection of transactions and applied a count by transaction type. The following code was used:
 
-javascript
-var mapFunction = function() {
-   emit(this.type, 1);
-};
+In Experiment 2, I created a collection of transactions and applied the Map-Reduce operation to count and aggregate values by transaction type. The Map-Reduce approach was used to efficiently process and summarize large amounts of data by grouping transaction entries based on a specific key, such as `cust_id` or `type`, and then performing aggregation (in this case, summing up the prices).
 
-var reduceFunction = function(key, values) {
-   return Array.sum(values);
-};
-
-db.transactions.mapReduce(mapFunction, reduceFunction, { out: "transaction_count" })
-This code maps the type field of each transaction document and reduces it by summing the values to get a total count for each transaction type.
+After executing the Map-Reduce operation, I was able to view the summarized results. This method provided a total count and value for each unique transaction type or customer ID. The results were stored in a new collection, making them easily accessible for further analysis or reporting purposes.
 
 ![Screenshot of Map-Reduce operation](https://github.com/NachoAlcaldeT/DAT250/blob/main/Assignment5/Screenshots_Assignment5/captura2-exp2.png)
-
-#### **Additional Map-Reduce Operation**
-I developed an additional operation to calculate the total amount of transactions by type. The operation was as follows:
-
-var mapFunction = function() {
-   emit(this.type, this.amount);
-};
-
-var reduceFunction = function(key, values) {
-   return Array.sum(values);
-};
-
-db.transactions.mapReduce(mapFunction, reduceFunction, { out: "total_amount_by_type" })
-
-This Map-Reduce operation is useful for analyzing the total amounts for each transaction type, which is relevant for financial statistics or audit reports.
-
-![Screenshot of the additional Map-Reduce operation.](ruta/a/la/captura/map_reduce_adicional.png)
+![Screenshot of Map-Reduce operation](https://github.com/NachoAlcaldeT/DAT250/blob/main/Assignment5/Screenshots_Assignment5/captura1-exp2.png)
 
 ---
 
