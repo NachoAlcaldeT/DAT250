@@ -1,7 +1,5 @@
 # DAT250: Software Technology Experiment Assignment 5
 
-## Final Report
-
 ### Technical Issues Encountered During the Installation and Use of MongoDB and How I Resolved Them
 
 During the installation of MongoDB, I encountered a few technical problems related to package validation and running the `mongod` service.
@@ -45,8 +43,11 @@ Reference link: [Insert Documents](https://docs.mongodb.com/manual/tutorial/inse
 ## Query Operation (Read)
 To retrieve documents from the collection, the following operation was performed:
 
-- **Screenshot of Insert Many**  
+- **Screenshot of Insert Many**
+![Screenshot of Insert Many](https://github.com/NachoAlcaldeT/DAT250/blob/main/Assignment5/Screenshots_Assignment5/Captura8-InsertMany2.0.png)
+
 - **Screenshot of Consult Insert (A, D)**  
+![Screenshot of Consult Insert (A, D)](https://github.com/NachoAlcaldeT/DAT250/blob/main/Assignment5/Screenshots_Assignment5/Captura11-ConsultarInsert(A%2C%20D).png)
 
 Reference link: [Query Documents](https://docs.mongodb.com/manual/tutorial/query-documents/)
 
@@ -55,8 +56,11 @@ Reference link: [Query Documents](https://docs.mongodb.com/manual/tutorial/query
 ## Update Operation (Update)
 I updated a specific document within the collection. Below are the screenshots:
 
-- **Screenshot of InsertUpdate**  
-- **Screenshot of InsertManyReplaceOne**  
+- **Screenshot of Insert Update**
+![Screenshot of Insert Update](https://github.com/NachoAlcaldeT/DAT250/blob/main/Assignment5/Screenshots_Assignment5/Captura13-InsertUpdate.png)
+  
+- **Screenshot of Insert Many and Replace One**  
+![Screenshot of Insert Many and Replace One](https://github.com/NachoAlcaldeT/DAT250/blob/main/Assignment5/Screenshots_Assignment5/Captura14-InsertManyReplaceOne.png)
 
 Reference link: [Update Documents](https://docs.mongodb.com/manual/tutorial/update-documents/)
 
@@ -65,8 +69,11 @@ Reference link: [Update Documents](https://docs.mongodb.com/manual/tutorial/upda
 ## Delete Operation (Delete)
 A specific document was deleted from the collection. The relevant screenshots are:
 
-- **Screenshot of InsertManyDeleteMany**  
-- **Screenshot of other commands**  
+- **Screenshot of Insert Many and Delete Many**
+![Screenshot of Insert Update](https://github.com/NachoAlcaldeT/DAT250/blob/main/Assignment5/Screenshots_Assignment5/Captura15-InsertManyDeleteMany.png)  
+
+- **Screenshot of other commands**
+![Screenshot of Insert Update](https://github.com/NachoAlcaldeT/DAT250/blob/main/Assignment5/Screenshots_Assignment5/Captura16-ComandosAdicionales.png)  
 
 Reference link: [Remove Documents](https://docs.mongodb.com/manual/tutorial/remove-documents/)
 
@@ -76,6 +83,7 @@ Reference link: [Remove Documents](https://docs.mongodb.com/manual/tutorial/remo
 Several bulk write operations were carried out to insert, update, and delete multiple documents efficiently. The screenshots show the process and results of these operations:
 
 - **Screenshot of bulk write operations**  
+![Screenshot of bulk write operations](https://github.com/NachoAlcaldeT/DAT250/blob/main/Assignment5/Screenshots_Assignment5/Captura17-Bulk%20Write.png)  
 
 Reference link: [Bulk Write Operations](https://docs.mongodb.com/manual/core/bulk-write-operations/)
 
@@ -98,7 +106,7 @@ var reduceFunction = function(key, values) {
 db.transactions.mapReduce(mapFunction, reduceFunction, { out: "transaction_count" })
 This code maps the type field of each transaction document and reduces it by summing the values to get a total count for each transaction type.
 
-![Screenshot of Map-Reduce operation](ruta/a/la/captura/map_reduce.png)
+![Screenshot of Map-Reduce operation](https://github.com/NachoAlcaldeT/DAT250/blob/main/Assignment5/Screenshots_Assignment5/captura2-exp2.png)
 
 #### **Additional Map-Reduce Operation**
 I developed an additional operation to calculate the total amount of transactions by type. The operation was as follows:
