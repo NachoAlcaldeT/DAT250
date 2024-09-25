@@ -20,7 +20,7 @@ During the installation of MongoDB, I encountered a few technical problems relat
 
 The package validation was successful using the instructions from the following link: [https://docs.mongodb.com/manual/tutorial/verify-mongodb-packages/](https://docs.mongodb.com/manual/tutorial/verify-mongodb-packages/).
 
-![Package Validation Screenshot](path/to/screenshot/validation.png)
+![Package Validation Screenshot](https://github.com/NachoAlcaldeT/DAT250/blob/main/Assignment5/Screenshots_Assignment5/MongoDB-True_screenshot.png)
 
 ---
 
@@ -29,9 +29,14 @@ The package validation was successful using the instructions from the following 
 ## Insert Operation (Create)
 I performed the operation of inserting documents into a collection. Below are the relevant screenshots:
 
-- **Screenshot of inserting documents**  
-- **Screenshot of querying the collection**  
+- **Screenshot of inserting documents**
+![Screenshot of inserting documents](https://github.com/NachoAlcaldeT/DAT250/blob/main/Assignment5/Screenshots_Assignment5/Captura1-A%C3%B1adirDocumentos.png)
+
+- **Screenshot of querying the collection**
+ ![Screenshot of querying the collection](https://github.com/NachoAlcaldeT/DAT250/blob/main/Assignment5/Screenshots_Assignment5/Captura3-ConsultarCollection.png)
+
 - **Screenshot of Insert Many**  
+![Screenshot of Insert Many](https://github.com/NachoAlcaldeT/DAT250/blob/main/Assignment5/Screenshots_Assignment5/Captura4-InsertMany.png)
 
 Reference link: [Insert Documents](https://docs.mongodb.com/manual/tutorial/insert-documents/)
 
