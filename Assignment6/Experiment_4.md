@@ -1,43 +1,43 @@
-# Experimento 4: Publicar/Suscribirse con RabbitMQ
+# Experiment 4: Publish/Subscribe with RabbitMQ
 
-## Descripción del Experimento
+## Experiment Description
 
-El Experimento 4 consistió en implementar un sistema de publicación y suscripción (publish/subscribe) utilizando RabbitMQ en Java. La idea principal era crear un sistema de logs distribuido donde múltiples consumidores pudieran recibir los mensajes emitidos por un productor, utilizando un **fanout exchange**. Esto nos permitió implementar un patrón en el que los mensajes publicados por un productor son distribuidos a todos los consumidores conectados.
+Experiment 4 involved implementing a publish/subscribe system using RabbitMQ in Java. The main idea was to create a distributed logging system where multiple consumers could receive messages emitted by a producer, using a **fanout exchange**. This allowed us to implement a pattern where messages published by a producer are distributed to all connected consumers.
 
-### Estructura del Proyecto
+### Project Structure
 
-El proyecto sigue la estructura de Gradle y el código fuente está organizado en el directorio `src/main/java/dat250`. Se desarrollaron dos clases principales:
+The project follows the Gradle structure and the source code is organized in the `src/main/java/dat250` directory. Two main classes were developed:
 
-- **EmitLog.java**: Un productor que emite mensajes de logs a un **fanout exchange** llamado `logs`.
-- **ReceiveLogs.java**: Un consumidor que se suscribe a los mensajes enviados a través del exchange y los imprime en la consola.
+- **EmitLog.java**: A producer that emits log messages to a **fanout exchange** called `logs`.
+- **ReceiveLogs.java**: A consumer that subscribes to messages sent through the exchange and prints them to the console.
 
-### Configuración del build.gradle
+### build.gradle Configuration
 
-Se utilizó el plugin Shadow para empaquetar las dependencias necesarias en un JAR ejecutable y facilitar la ejecución de las clases. Aquí se muestran algunas configuraciones importantes:
+The Shadow plugin was used to package the necessary dependencies into an executable JAR and facilitate the execution of the classes. Here are some important configurations:
 
-- Se añadió la dependencia para el cliente AMQP de RabbitMQ:
+- The dependency for the RabbitMQ AMQP client was added:
 ```java
   implementation("com.rabbitmq:amqp-client:5.16.0")
 ```
-- Se configuró la clase principal por defecto como `dat250.Worker`, aunque para este experimento se utilizó la ejecución directa de otras clases (`EmitLog` y `ReceiveLogs`).
+- The default main class was set to `dat250.Worker`, although for this experiment we used direct execution of other classes (`EmitLog` and `ReceiveLogs`).
 
-## Problemas Encontrados y Soluciones
+## Problems Encountered and Solutions
 
-### 1. Error al Compilar con javac
+### 1. Error Compiling with javac
 
-Inicialmente intentamos compilar las clases manualmente con `javac`, pero recibimos el error:
+Initially, we tried to compile the classes manually with `javac`, but received the error:
 ```java
 error: file not found: EmitLog.java
 ```
-Este problema surgió porque el comando `javac` no estaba apuntando a la ruta correcta de los archivos fuente. En lugar de compilar manualmente, decidimos utilizar Gradle para gestionar la compilación y las dependencias.
+This problem occurred because the `javac` command was not pointing to the correct path of the source files. Instead of compiling manually, we decided to use Gradle to manage the compilation and dependencies.
 
-**Solución**: Ejecutamos el comando `./gradlew build` para compilar automáticamente todas las clases dentro del proyecto.
+**Solution**: We executed the command `./gradlew build` to automatically compile all classes within the project.
 
 ### 2. Ejecución de las Clases Correctas
 
-El `build.gradle` estaba configurado para ejecutar la clase `dat250.Worker` por defecto. Sin embargo, para este experimento necesitábamos ejecutar las clases `EmitLog` y `ReceiveLogs`. Esto generó confusión sobre cómo especificar la clase que deseábamos ejecutar.
+The `build.gradle` was configured to run the `dat250.Worker` class by default. However, for this experiment, we needed to run the `EmitLog` and `ReceiveLogs` classes. This created confusion about how to specify the class we wanted to execute.
 
-**Solución**: Utilizamos el siguiente comando de Gradle para ejecutar las clases específicas:
+**Solution**: We used the following Gradle command to run the specific classes:
 ```java
 ./gradlew run --args='dat250.EmitLog "Mensaje de prueba"'
 ```
@@ -45,19 +45,20 @@ y
 ```java
 ./gradlew run --args='dat250.ReceiveLogs'
 ```
-Esto nos permitió ejecutar tanto el productor como el consumidor desde la línea de comandos sin modificar la configuración del `build.gradle`.
+This allowed me to run both the producer and consumer from the command line without modifying the `build.gradle` configuration.
 
-### 3. Paquetes de Clases y Classpath
+### 3. Class Packages and Classpath
 
-Durante la ejecución con `java`, hubo problemas relacionados con el classpath, ya que inicialmente no se incluían correctamente las dependencias. Este problema fue resuelto empaquetando todo en un JAR utilizando Shadow y luego utilizando el siguiente comando para ejecutar:
+During execution with `java`, there were issues related to the classpath, as the dependencies were not initially included correctly. This problem was resolved by packaging everything into a JAR using Shadow and then using the following command to execute:
+
 ```java
 java -cp "build/libs/assignment6_RabbitMQ-1.0-SNAPSHOT-all.jar" dat250.EmitLog "Mensaje de prueba"
 ```
-## Problemas Pendientes
+## Pending Issues
 
-No hemos tenido problemas pendientes al finalizar la ejecución del experimento. Sin embargo, es recomendable verificar siempre que RabbitMQ esté ejecutándose correctamente en el puerto adecuado (localhost:5672).
+We have not encountered any pending issues upon completion of the experiment. However, it is advisable to always check that RabbitMQ is running correctly on the appropriate port (localhost:5672).
 
-## Código Fuente
+## Source Code
 
 ### EmitLog.java
 ```java
@@ -113,11 +114,11 @@ public class ReceiveLogs {
     }  
 }
 ```
-## Captura de Pantalla
+## Screenshot
 
-Aquí está la captura de pantalla mostrando el envío y la recepción correctos de un mensaje en el sistema RabbitMQ:
-![Captura de pantalla - Envío y recepción de mensajes en RabbitMQ](https://github.com/NachoAlcaldeT/DAT250/blob/main/Assignment6/Screenshots_Assignment6/experiment4_RabbitMQ.png)
+Here is the screenshot showing the correct sending and receiving of a message in the RabbitMQ system:
+![Screenshot - Sending and receiving messages in RabbitMQ](https://github.com/NachoAlcaldeT/DAT250/blob/main/Assignment6/Screenshots_Assignment6/experiment4_RabbitMQ.png)
 
-## Conclusiones
+## Conclusions
 
-El experimento fue exitoso y logramos implementar el patrón de publicación/suscripción utilizando RabbitMQ y Java. A pesar de los desafíos iniciales con la compilación manual y la ejecución de las clases, la integración de Gradle facilitó el proceso. Todos los problemas identificados fueron resueltos y el sistema funcionó correctamente.
+The experiment was successful, and we managed to implement the publish/subscribe pattern using RabbitMQ and Java. Despite the initial challenges with manual compilation and executing the classes, integrating Gradle facilitated the process. All identified problems were resolved, and the system worked correctly.
