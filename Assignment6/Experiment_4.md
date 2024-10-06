@@ -116,7 +116,7 @@ public class ReceiveLogs {
 ## Captura de Pantalla
 
 Aquí está la captura de pantalla mostrando el envío y la recepción correctos de un mensaje en el sistema RabbitMQ:
-![Captura de pantalla - Envío y recepción de mensajes en RabbitMQ](https://github.com/NachoAlcaldeT/DAT250/blob/main/Assignment5/Screenshots_Assignment5/MongoDB-True_screenshot.png)
+![Captura de pantalla - Envío y recepción de mensajes en RabbitMQ](https://github.com/NachoAlcaldeT/DAT250/blob/main/Assignment6/Screenshots_Assignment6/experiment4_RabbitMQ.png)
 
 ## Conclusiones
 
