@@ -10,7 +10,7 @@ docker run -it --rm --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:4.0-man
 This command sets up RabbitMQ on the default ports, with the management plugin enabled, allowing us to access the management interface.
 
 ## Issues Encountered
-During the installation process, we encountered no problems. The RabbitMQ server started successfully, and we were able to access the management interface without any issues.
+During the installation process, I did not encounter any problems. The RabbitMQ server started successfully, and I was able to access the management interface without any issues.
 
 ## Accessing the Management Interface
 After running the above command, RabbitMQ was accessible through the management interface at the URL http://localhost:15672. The default username and password are both set to guest.
