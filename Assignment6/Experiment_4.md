@@ -113,6 +113,11 @@ public class ReceiveLogs {
     }  
 }
 ```
+## Captura de Pantalla
+
+Aquí está la captura de pantalla mostrando el envío y la recepción correctos de un mensaje en el sistema RabbitMQ:
+![Captura de pantalla - Envío y recepción de mensajes en RabbitMQ](https://github.com/NachoAlcaldeT/DAT250/blob/main/Assignment5/Screenshots_Assignment5/MongoDB-True_screenshot.png)
+
 ## Conclusiones
 
 El experimento fue exitoso y logramos implementar el patrón de publicación/suscripción utilizando RabbitMQ y Java. A pesar de los desafíos iniciales con la compilación manual y la ejecución de las clases, la integración de Gradle facilitó el proceso. Todos los problemas identificados fueron resueltos y el sistema funcionó correctamente.
