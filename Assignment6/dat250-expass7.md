@@ -1,4 +1,4 @@
-# DAT250 Project Summary
+# DAT250: Software Technology Experiment Assignment 6
 
 This project focuses on exploring RabbitMQ, a powerful message broker that facilitates communication between distributed systems. Throughout the project, I conducted various experiments to understand how to set up, use, and troubleshoot RabbitMQ effectively. Below is a summary of each experiment, along with links to their detailed reports.
 
