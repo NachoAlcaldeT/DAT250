@@ -71,7 +71,7 @@ public class Recv {
 
 ## Issues Encountered
 
-Interestingly, there were no significant issues encountered during this experiment. The RabbitMQ setup and communication between the producer and consumer worked as expected. The straightforward nature of the "Hello World" implementation made it a smooth experience.
+There were no significant issues encountered during this experiment. The RabbitMQ setup and communication between the producer and consumer worked as expected. The straightforward nature of the "Hello World" implementation made it a smooth experience.
 
 ## Screenshot
 
