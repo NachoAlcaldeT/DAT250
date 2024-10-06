@@ -1,4 +1,4 @@
-# Report for Experiment 3: RabbitMQ Integration
+# Experiment 3: RabbitMQ Integration
 
 ## Introduction
 
