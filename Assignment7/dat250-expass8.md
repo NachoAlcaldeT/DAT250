@@ -153,8 +153,6 @@ Here is a breakdown of the steps in my `Dockerfile`:
 3. **Creating a Minimal Runtime**  
    The second stage uses a lightweight `temurin` image to copy the built `.jar` file from the first stage. This helps avoid unnecessary dependencies in the final image.
 
-### Here’s what the Dockerfile looks like:
-
 ## Step 2: Building the Docker Image
 
 After setting up the Dockerfile, I ran the following command to build the Docker image:
