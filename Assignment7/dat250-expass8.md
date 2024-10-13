@@ -104,6 +104,8 @@ After making all the necessary adjustments to the PostgreSQL configuration and s
 
 The error I received indicated that the tables were not defined. This issue occurred because I had not enabled automatic schema generation in the initial `persistence.xml` configuration.
 
+![Screenshot of First Test Run](https://github.com/NachoAlcaldeT/DAT250/blob/main/Assignment7/Screenshots_Assignment7/Screenshot4_Docker.png)
+
 ### Problem Resolution
 
 To resolve this issue, I added the following properties to the `persistence.xml` file, which allowed the necessary SQL scripts for creating and dropping the tables to be generated:
@@ -128,4 +130,4 @@ I used my SQL client to connect to the PostgreSQL database and execute the `CREA
 
 After manually creating the tables in the database, I ran the unit tests again. This time, the tests passed successfully, confirming that the configuration was now working as expected with PostgreSQL instead of H2.
 
-![Screenshot of H2 Console (createTable)](https://github.com/NachoAlcaldeT/DAT250/blob/main/Assignment4/createTable_screenshot.png)
+![Screenshot of Second Test Run](https://github.com/NachoAlcaldeT/DAT250/blob/main/Assignment7/Screenshots_Assignment7/Screenshot5_Docker.png)
