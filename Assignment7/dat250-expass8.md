@@ -114,17 +114,17 @@ To resolve this issue, I added the following properties to the `persistence.xml`
 <property name="jakarta.persistence.schema-generation.scripts.drop-target" value="schema.down.sql"/>
 ```
 
-## SQL Script Generation
+### SQL Script Generation
 
 By adding these lines, two files were generated: `schema.up.sql` and `schema.down.sql`. These files contain the SQL statements needed to create (and drop) the tables that my JPA data model expects.
 
 Once these files were generated, the next step was to apply the SQL statements manually in the database using an SQL client.
 
-## Manually Applying the Scripts
+### Manually Applying the Scripts
 
 I used my SQL client to connect to the PostgreSQL database and execute the `CREATE TABLE` statements from the `schema.up.sql` file. This created the required tables in the database.
 
-## Successful Second Test Run
+### Successful Second Test Run
 
 After manually creating the tables in the database, I ran the unit tests again. This time, the tests passed successfully, confirming that the configuration was now working as expected with PostgreSQL instead of H2.
 
