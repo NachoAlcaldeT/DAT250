@@ -131,3 +131,55 @@ I used my SQL client to connect to the PostgreSQL database and execute the `CREA
 After manually creating the tables in the database, I ran the unit tests again. This time, the tests passed successfully, confirming that the configuration was now working as expected with PostgreSQL instead of H2.
 
 ![Screenshot of Second Test Run](https://github.com/NachoAlcaldeT/DAT250/blob/main/Assignment7/Screenshots_Assignment7/Screenshot5_Docker.png)
+
+---
+
+## Part 2: Building My Own Dockerized Application
+
+In this part of the task, I worked on containerizing my Spring Boot application from a previous experiment. The objective was to package the application into a Docker image, which would simplify sharing the app with other developers and eventually allow for cloud deployment.
+
+## Step 1: Setting Up the Dockerfile
+
+I started by creating a `Dockerfile` in the root of my Spring Boot project. I used a multi-stage build to keep the image size smaller and ensure the final container runs efficiently.
+
+Here is a breakdown of the steps in my `Dockerfile`:
+
+1. **Selecting a Base Image**  
+   I chose the official `gradle` image as the base for the build stage, and `temurin` (for Java runtime) for the final image.
+   
+2. **Building the Application**  
+   The first stage uses `gradle` to build the application and generate the necessary `.jar` file using the `bootJar` task.
+   
+3. **Creating a Minimal Runtime**  
+   The second stage uses a lightweight `temurin` image to copy the built `.jar` file from the first stage. This helps avoid unnecessary dependencies in the final image.
+
+### Here’s what the Dockerfile looks like:
+
+## Step 2: Building the Docker Image
+
+After setting up the Dockerfile, I ran the following command to build the Docker image:
+
+```bash
+docker build -t my-spring-boot-app
+```
+
+This command created an image tagged as `my-spring-boot-app`, ready to be used for running the application in a container.
+
+## Step 3: Running the Docker Container
+
+Once the image was built, I started the Spring Boot application within a Docker container by running the following command:
+
+```bash
+docker run -p 8080:8080 my-spring-boot-app
+```
+
+This command mapped the container’s port 8080 to my local machine’s port 8080, allowing me to access the application via `localhost:8080`.
+
+## Step 4: Testing the Application
+
+To verify that the application was working correctly, I tested it using a web browser. I used **Bruno** as my API testing tool and accessed the application at `http://localhost:8080`. 
+
+![Screenshot of testing the Application](https://github.com/NachoAlcaldeT/DAT250/blob/main/Assignment7/Screenshots_Assignment7/Screenshot6_Docker.png)
+
+The test confirmed that the Spring Boot application was running successfully, and everything was functioning as expected.
+
