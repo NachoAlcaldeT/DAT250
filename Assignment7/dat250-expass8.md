@@ -1,35 +1,42 @@
-# DAT250: Tarea 7 del Experimento de Tecnología de Software
+## DAT250: Assignment 7 - Software Technology Experiment
 
-## Introducción
-En esta tarea hemos trabajado con Docker para contenedorización de software, con el objetivo de entender tanto el uso de imágenes Docker oficiales como la creación de nuestras propias imágenes. La tarea se divide en dos partes:
+## Introduction
 
-1. Utilizar una imagen Docker oficial de PostgreSQL y configurarla para que funcione con una aplicación Java.
-2. Crear nuestra propia imagen Docker para una aplicación Spring Boot, empaquetándola en un contenedor.
+In this assignment, I worked with Docker for software containerization, aiming to understand both the use of official Docker images and the creation of my own images. The task is divided into two parts:
 
-### Errores Encontrados
-Durante la realización de la tarea, nos encontramos con los siguientes problemas:
-- **Problemas de conexión con PostgreSQL**: Al principio no configuramos correctamente las variables de entorno, lo que causaba errores de autenticación al conectarnos a la base de datos. Se resolvió al asegurarnos de que las variables `POSTGRES_USER`, `POSTGRES_PASSWORD` y `POSTGRES_DB` estaban correctamente definidas.
-- **Incompatibilidades con versiones de dependencias**: En el proyecto Java, hubo algunos problemas al cambiar el controlador de H2 a PostgreSQL. Esto se solucionó agregando la dependencia correcta de PostgreSQL y ajustando el archivo `persistence.xml`.
+1. Use an official Docker image for PostgreSQL and configure it to work with a Java application.
+2. Create my own Docker image for a Spring Boot application, packaging it into a container.
 
-Finalmente, hemos sido capaces de completar ambas partes de la tarea con éxito, incluyendo la ejecución de nuestras pruebas unitarias usando PostgreSQL y el empaquetado de la aplicación Spring Boot en un contenedor Docker funcional.
+### Issues Encountered
 
-## Parte 1: Uso de una imagen Dockerizada: PostgreSQL
+During the assignment, I encountered the following issues:
 
-### Configuración
-Primero, aseguramos que Docker esté instalado y funcionando. Para verificarlo, ejecutamos el siguiente comando:
+- **Connection issues with PostgreSQL**: Initially, I incorrectly configured the environment variables, which caused authentication errors when trying to connect to the database. I resolved this by ensuring that the `POSTGRES_USER`, `POSTGRES_PASSWORD`, and `POSTGRES_DB` variables were properly set.
+- **Dependency version conflicts**: When switching from the H2 driver to PostgreSQL in the Java project, I ran into some dependency issues. These were solved by adding the correct PostgreSQL dependency and adjusting the `persistence.xml` file.
+
+In the end, I was able to successfully complete both parts of the assignment, including running unit tests using PostgreSQL and packaging the Spring Boot application into a functional Docker container.
+
+---
+
+## Part 1: Using a Dockerized PostgreSQL Image
+
+### Configuration
+
+First, I ensured Docker was installed and running by verifying with the following command:
 
 ```bash
 docker system info
 ```
 
-### Descargar y ejecutar la imagen de PostgreSQL
-Descargamos la imagen oficial de PostgreSQL desde Docker Hub con el siguiente comando:
+### Downloading and Running the PostgreSQL Image
+
+I pulled the official PostgreSQL image from Docker Hub using the following command:
 
 ```bash
 docker pull postgres
 ```
 
-Luego, para iniciar un contenedor de PostgreSQL, ejecutamos el comando docker run con los siguientes argumentos:
+Next, to start a PostgreSQL container, I used the `docker run` command with the following arguments:
 
 ```bash
 docker run -p 5432:5432 \
@@ -38,38 +45,51 @@ docker run -p 5432:5432 \
   -e POSTGRES_DB=postgres \
   -d --name my-postgres --rm postgres
 ````
-- **p 5432:5432: Mapea el puerto del contenedor al host.**
-- **e POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB: Variables de entorno para configurar el usuario, contraseña y la base de datos inicial.**
-- **d: Inicia el contenedor en segundo plano.**
-- **name my-postgres: Asigna un nombre al contenedor.**
-- **rm: Elimina el contenedor automáticamente al detenerse.**
 
-### Verificar el estado del contenedor
-Usamos el siguiente comando para comprobar que el contenedor esté en ejecución:
+- `-p 5432:5432`: Maps the container's port to the host.
+- `-e POSTGRES_USER, POSTGRES_PASSWORD, POSTGRES_DB`: Environment variables to set the user, password, and initial database.
+- `-d`: Runs the container in detached mode.
+- `--name my-postgres`: Assigns a name to the container.
+- `--rm`: Automatically removes the container when stopped.
+
+### Verifying the Container Status
+
+To verify that the container was running, I used the following command:
+
 ```bash
 docker ps
 ```
 
-### Logs del contenedor
-Para ver los logs y asegurarnos de que PostgreSQL está funcionando correctamente:
+
+### Checking the Container Logs
+
+To check the logs and ensure PostgreSQL was running properly, I executed:
+
 ```bash
 docker logs my-postgres
 ```
 
-### Conectar a PostgreSQL desde psql
-Para conectarnos a PostgreSQL usando el cliente psql, utilizamos el siguiente comando:
+
+### Connecting to PostgreSQL via psql
+
+To connect to PostgreSQL using the psql client, I used the following command:
+
 ```bash
 psql -h 127.0.0.1 -p 5432 -U jpa_client -d postgres
 ```
-Las credenciales configuradas anteriormente son utilizadas aquí (jpa_client, secret).
 
-### Configuración en la Aplicación Java
-Cambiamos de H2 a PostgreSQL en el proyecto Java agregando la siguiente dependencia en build.gradle.kts:
+I used the credentials configured earlier (jpa_client, secret) here.
+
+### Java Application Configuration
+
+I switched from H2 to PostgreSQL in the Java project by adding the following dependency to `build.gradle.kts`:
+
 ```bash
 implementation("org.postgresql:postgresql:42.7.4")
 ```
 
-Luego, modificamos el archivo persistence.xml para que utilice PostgreSQL:
+I then modified the `persistence.xml` file to use PostgreSQL:
+
 ```bash
 <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
 <property name="hibernate.connection.driver_class" value="org.postgresql.Driver"/>
@@ -78,15 +98,15 @@ Luego, modificamos el archivo persistence.xml para que utilice PostgreSQL:
 <property name="hibernate.connection.password" value="secret"/>
 ```
 
-## Resultados de las Pruebas:
+## Test Results
 
-Después de realizar todos los ajustes necesarios en la configuración de PostgreSQL y cambiar de la base de datos H2 a PostgreSQL, procedimos a ejecutar nuestras pruebas unitarias. **Inicialmente, las pruebas fallaron** debido a que las tablas requeridas por JPA no existían en la base de datos.
+After making all the necessary adjustments to the PostgreSQL configuration and switching from H2 to PostgreSQL, I proceeded to run my unit tests. **Initially, the tests failed** because the tables required by JPA did not exist in the database.
 
-El error que se generó indicaba que las tablas no estaban definidas. Este problema ocurrió porque en la configuración inicial no habíamos habilitado la creación automática de esquemas en `persistence.xml`.
+The error I received indicated that the tables were not defined. This issue occurred because I had not enabled automatic schema generation in the initial `persistence.xml` configuration.
 
-### Resolución del Problema
+### Problem Resolution
 
-Para resolver este problema, añadimos las siguientes propiedades en el archivo `persistence.xml`, lo que permitió generar los scripts SQL necesarios para crear y eliminar las tablas:
+To resolve this issue, I added the following properties to the `persistence.xml` file, which allowed the necessary SQL scripts for creating and dropping the tables to be generated:
 
 ```xml
 <property name="jakarta.persistence.schema-generation.scripts.action" value="drop-and-create"/>
@@ -94,17 +114,18 @@ Para resolver este problema, añadimos las siguientes propiedades en el archivo 
 <property name="jakarta.persistence.schema-generation.scripts.drop-target" value="schema.down.sql"/>
 ```
 
-## Generación de Scripts SQL
+## SQL Script Generation
 
-Al agregar estas líneas, se generaron dos archivos: `schema.up.sql` y `schema.down.sql`. Estos archivos contienen las sentencias SQL necesarias para crear (y eliminar) las tablas que nuestro modelo de datos JPA espera.
+By adding these lines, two files were generated: `schema.up.sql` and `schema.down.sql`. These files contain the SQL statements needed to create (and drop) the tables that my JPA data model expects.
 
-Una vez generados estos archivos, el siguiente paso fue aplicar las sentencias SQL manualmente en la base de datos a través de un cliente SQL.
+Once these files were generated, the next step was to apply the SQL statements manually in the database using an SQL client.
 
-## Aplicación Manual de los Scripts
+## Manually Applying the Scripts
 
-Usamos nuestro cliente SQL para conectarnos a la base de datos PostgreSQL y ejecutar las sentencias `CREATE TABLE` del archivo `schema.up.sql`. De esta forma, se crearon las tablas en la base de datos.
+I used my SQL client to connect to the PostgreSQL database and execute the `CREATE TABLE` statements from the `schema.up.sql` file. This created the required tables in the database.
 
-## Segunda Ejecución de Pruebas: Éxito
+## Successful Second Test Run
 
-Finalmente, después de haber creado manualmente las tablas en la base de datos, volvimos a ejecutar las pruebas unitarias. Esta vez las pruebas pasaron correctamente, lo que confirmó que la configuración estaba ahora funcionando como se esperaba con PostgreSQL en lugar de H2.
+After manually creating the tables in the database, I ran the unit tests again. This time, the tests passed successfully, confirming that the configuration was now working as expected with PostgreSQL instead of H2.
+
 ![Screenshot of H2 Console (createTable)](https://github.com/NachoAlcaldeT/DAT250/blob/main/Assignment4/createTable_screenshot.png)
